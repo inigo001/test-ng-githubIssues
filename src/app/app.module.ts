@@ -3,16 +3,29 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { IssuesComponent } from './issues/issues.component';
+import { FormsModule } from '@angular/forms';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+
+import { GithubConnectorService } from './gh-connector.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IssuesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    GithubConnectorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,45 @@
+<div>
+
+  <input [(ngModel)]="repoName" placeholder="Repository Name" (keyup.enter)="getIssues()">
+  <button (click)="getIssues()">Buscar Issues</button>
+  <span>{{status}}</span>
+
+  <div *ngIf="issues && issues.length <= 0">
+    Ninguna Issue encontrada en este repositorio
+  </div>
+
+</div>
+
+<div>
+  <li *ngFor="let issue of issues | paginate: { itemsPerPage: 5, currentPage: p }">
+
+    <div class="card">
+
+      <div class="card-header">
+        {{issue.title}}
+      </div>
+      <div class="card-body">
+        {{issue.body}}
+      </div>
+      <div class="card-footer">
+        <div class="footer-text">
+
+          <span class="issue-user">
+            <span>{{issue.user.login}}</span>
+            <img class="user-image" src="{{issue.user.avatar_url}}" alt="Avatar of {{issue.user.login}}">
+          </span>
+
+          <span class="issue-date">
+            Created At: {{issue.created_at}}
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+
+  </li>
+
+  <pagination-controls *ngIf="issues && issues.length > 0" previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
+
+</div>
